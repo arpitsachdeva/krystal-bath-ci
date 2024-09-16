@@ -1,0 +1,258 @@
+<header class="header-area">
+  <div class="top_header_sec">
+    <div class="container">
+      <div class="top_header_inner d-flex align-items-center justify-content-end">
+        <div class="top_menu">
+          <ul class="d-flex align-items-center">
+            <li><a href="tel:+919999622620">+91 9999622620</a></li>
+            <li><a href="{{ routes.about_us_url }}">About us</a></li>
+            <li><a href="{{ routes.warranty_url }}">Warranty</a></li>
+            <li><a href="{{ routes.guidelines_url }}">Guidelines</a></li>
+            <li><a href="{{ routes.contact_us_url }}">Contact us</a></li>
+            <li><a href="{{ routes.catalogue_url }}">E-catalogue</a></li>
+          </ul>
+        </div>
+        <div class="t_follow d-flex align-items-center justify-content-end">
+          <ul class="th_right d-flex align-items-center">
+            <li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-pinterest"></i></a></li>
+          </ul>
+        </div>
+        <div class="dropdown_sec d-flex align-items-center justify-content-end">
+          <div class="dropdown pe-1">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              English
+            </button>
+            <ul class="dropdown-menu p-0">
+              <li><a class="dropdown-item" href="#">Hindi</a></li>
+              <li><a class="dropdown-item" href="#">French</a></li>
+              <li><a class="dropdown-item" href="#">Italian</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              India (R)
+            </button>
+            <ul class="dropdown-menu p-0">
+              <li><a class="dropdown-item" href="#">India (R)</a></li>
+              <li><a class="dropdown-item" href="#">US</a></li>
+              <li><a class="dropdown-item" href="#">UK</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="btm_nav_sec">
+    <div class="container">
+      <div class="btm_nav_inner d-flex align-items-center justify-content-between">
+        <div class="logo_sec">
+          <a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="logo" class="img-fluid"></a>
+        </div>
+        <div class="main_menu_sec">
+          <nav class="main-nav bottom-nav norm_menu d-flex align-items-center justify-content-center">
+            <ul class="nav ps-0 justify-content-center">
+                <a href="javascript:void(0)" class="cross_icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </a>
+                
+                {% for link in linklists.main-menu.links %}
+
+                    <li class="menu-item-has-children">
+                        {% if link.links != blank %}
+                            
+                            <a class="{% if link.active == true %} active {% endif %}" href="{{ link.url }}">{{ link.title }}</a> 
+                            <i class="fa-solid fa-angle-down"></i>
+                            {% for childlink in link.links %}
+                                    <ul class="sub-menu">
+                                    <li><a href="#">{{ childlink.title }}</a></li>
+                                    </ul>
+                                
+                            {% endfor %}
+                        {% else %}
+                            <a class="{% if link.active == true %} active {% endif %}" href="{{ link.url }}">{{ link.title }}</a> 
+                        {% endif %}
+                        
+                        
+                        {% comment %} <ul class="sub-menu">
+                            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                        </ul> {% endcomment %}
+                    </li>
+                {% endfor %}
+
+            </ul>
+
+            {% comment %} <ul class="nav ps-0 justify-content-center"></ul>
+                <a href="javascript:void(0)" class="cross_icon">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </a>
+                <li class="menu-item-has-children"><a href="#" class="active">Collections</a> <i class="fa-solid fa-angle-down"></i>
+                  <ul class="sub-menu">
+                    <li><a href="#">Collections</a></li>
+                  </ul></li>
+                <li class="menu-item-has-children"><a href="#">Kitchen</a> <i class="fa-solid fa-angle-down"></i>
+                  <ul class="sub-menu">
+                    <li><a href="#">Kitchen</a></li>
+                  </ul></li>
+                <li class="menu-item-has-children"><a href="#">Bathroom</a> <i class="fa-solid fa-angle-down"></i>
+                  <ul class="sub-menu">
+                    <li><a href="#">Bathroom</a></li>
+                  </ul>
+                </li>
+                <li class="menu-item-has-children"><a href="rnd.html">New Arriavals</a> <i class="fa-solid fa-angle-down"></i>
+                  <ul class="sub-menu">
+                    <li><a href="#">New Arriavals</a></li>
+                  </ul>
+                </li>
+              </ul> {% endcomment %}
+            <div class="menu_icon_sec">
+              <a href="javascript:void(0)">
+                <span></span>
+                <span></span>
+                <span></span>
+              </a>
+            </div>
+            <div class="header_cart d-md-block d-none">
+              <ul class="d-flex align-items-center">
+                <li><a href="#"><img src="{{ 'search_icon.png' | asset_url }}" alt="search_icon" class="img-fluid"></a></li>
+                <li><a href="#"><img src="{{ 'heart_icon.png' | asset_url }}" alt="heart_icon" class="img-fluid"></a></li>
+                <li><a href="#"><img src="{{ 'user_icon.png' | asset_url }}" alt="user_icon" class="img-fluid"></a></li>
+                <li><a href="{{ routes.cart_url }}"><img src="{{ 'cart_icon.png' | asset_url }}" alt="cart_icon" class="img-fluid pe-2">Cart ({{ cart.item_count }})</a></li>
+              </ul>
+            </div>
+          </nav>
+          <nav class="main-nav bottom-nav sticky_menu">
+            <div class="container">
+              <div class="btm_nav_inner d-flex align-items-center justify-content-between">
+                <div class="logo_sec">
+                  <a href="{{ routes.home_url }}"><img src="{{ 'logo.png' | asset_url }}" alt="logo" class="img-fluid"></a>
+                </div>
+                <ul class="nav ps-0 justify-content-center">
+                  <a href="javascript:void(0)" class="cross_icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </a>
+                  <li class="menu-item-has-children">
+                    <a href="#" class="active">Collections</a> 
+                    <i class="fa-solid fa-angle-down"></i>
+                    <ul class="sub-menu">
+                      <li><a href="{{ routes.collections_url }}">Collections</a></li>
+                    </ul>
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="#">Kitchen</a> 
+                    <i class="fa-solid fa-angle-down"></i>
+                    <ul class="sub-menu">
+                      <li><a href="{{ routes.kitchen_url }}">Kitchen</a></li>
+                    </ul>
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="#">Bathroom</a> 
+                    <i class="fa-solid fa-angle-down"></i>
+                    <ul class="sub-menu">
+                      <li><a href="{{ routes.bathroom_url }}">Bathroom</a></li>
+                    </ul>
+                  </li>
+                  <li class="menu-item-has-children">
+                    <a href="{{ routes.new_arrivals_url }}">New Arrivals</a> 
+                    <i class="fa-solid fa-angle-down"></i>
+                    <ul class="sub-menu">
+                      <li><a href="{{ routes.new_arrivals_url }}">New Arrivals</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <div class="menu_icon_sec">
+                  <a href="javascript:void(0)" class="ms-auto">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </a>
+                </div>
+                <div class="header_cart d-md-block d-none">
+                  <ul class="d-flex align-items-center">
+                    <li><a href="#"><img src="{{ 'search_icon.png' | asset_url }}" alt="search_icon" class="img-fluid"></a></li>
+                    <li><a href="#"><img src="{{ 'heart_icon.png' | asset_url }}" alt="heart_icon" class="img-fluid"></a></li>
+                    <li><a href="#"><img src="{{ 'user_icon.png' | asset_url }}" alt="user_icon" class="img-fluid"></a></li>
+                    <li><a href="#"><img src="{{ 'cart_icon.png' | asset_url }}" alt="cart_icon" class="img-fluid pe-2">Cart ({{ cart.item_count }})</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile_cart">
+    <div class="container">
+      <div class="header_cart d-md-none d-block">
+        <ul class="d-flex align-items-center justify-content-center">
+          <li><a href="#"><img src="{{ 'search_icon.png' | asset_url }}" alt="search_icon" class="img-fluid"></a></li>
+          <li><a href="#"><img src="{{ 'heart_icon.png' | asset_url }}" alt="heart_icon" class="img-fluid"></a></li>
+          <li><a href="#"><img src="{{ 'user_icon.png' | asset_url }}" alt="user_icon" class="img-fluid"></a></li>
+          <li><a href="#"><img src="{{ 'cart_icon.png' | asset_url }}" alt="cart_icon" class="img-fluid pe-2">Cart ({{ cart.item_count }})</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js'></script>
+    <script>
+        // Put your application javascript here
+        $('.menu_icon_sec > a').on('click', function(){
+            $('body').addClass('active_menu');
+        });
+
+        $('.cross_icon span').on('click', function(){
+            $('body').removeClass('active_menu');
+        });
+
+        $(window).resize(function() {
+            if (window.innerWidth < 991) {
+                $(document).ready(function () {
+                    $('.nav li a + i').on("click", function (e) {
+                        e.preventDefault();
+                        $(this).parent().find('>ul').slideToggle(100);
+                    });
+                });
+            }
+        }).resize();
+
+
+        $(window).scroll(function(){
+            var sticky = $('header'),
+            scroll = $(window).scrollTop();
+            if (scroll >= 150){
+                sticky.addClass('fixed_header');
+            }
+            else {
+                sticky.removeClass('fixed_header');
+            }
+        });
+
+
+
+        $(document).ready(function(){
+            $('.h_height').matchHeight();
+            $('.footer_menu').matchHeight();
+            $('.footer_box').matchHeight();
+            
+        });
+
+
+
+    </script>
+</header>
+
+

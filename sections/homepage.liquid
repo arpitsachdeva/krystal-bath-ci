@@ -1,0 +1,113 @@
+{% render 'banner-section' %}
+
+
+    
+{% comment %} <div id="recent-products"></div> {% endcomment %}
+
+<!-- Recent products will be injected here by JavaScript -->
+</div>
+
+<section>
+    <div class="main_section space_sec">
+      <div class="container">
+        <div class="heading_sec">
+          <h2>New Arrivals</h2>
+        </div>
+        <div class="main_outer">
+          <div class="row" id="recent-products">
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <section id="bestsellers-section">
+        <div class="main_section space_sec pt-0">
+          <div class="container">
+            <div class="heading_sec">
+              <h2>Bestsellers</h2>
+            </div>
+            <div class="main_outer">
+              <div class="row" id="bestsellers-products" data-collection-name="Bestsellers"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% render 'faucets' %}
+      
+      <section id="faucets-section">
+        <div class="main_section space_sec pt-0">
+          <div class="container">
+            <div class="heading_sec">
+              <h2>Faucets</h2>
+            </div>
+            <div class="main_outer">
+              <div class="row" id="faucets-products" data-collection-name="Faucets"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="showers-section">
+        <div class="main_section space_sec pt-0">
+          <div class="container">
+            <div class="heading_sec">
+              <h2>Showers</h2>
+            </div>
+            <div class="main_outer">
+              <div class="row" id="showers-products" data-collection-name="Showers"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% render 'kitchen-essentials' %}
+      
+      <section id="favourites-section">
+        <div class="main_section space_sec pt-0">
+          <div class="container">
+            <div class="heading_sec">
+              <h2>Favourites</h2>
+            </div>
+            <div class="main_outer">
+              <div class="row" id="favourites-products" data-collection-name="Favourites"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% render 'bathroom-essentials' %}
+
+      {% render 'bathroom' %}
+
+      <section id="kitchen-sinks-section">
+        <div class="main_section space_sec">
+          <div class="container">
+            <div class="heading_sec">
+              <h2>Kitchen Sinks</h2>
+            </div>
+            <div class="main_outer">
+              <div class="row" id="kitchen-sinks-products" data-collection-name="Kitchen Sinks"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+</section>
+
+
+
+<!-- Include your JavaScript file -->
+<script src="{{ 'application.js' | asset_url }}" defer></script>
+
+
+
+
+
+
+
+
+

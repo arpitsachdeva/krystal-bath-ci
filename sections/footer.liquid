@@ -1,0 +1,117 @@
+<footer>
+  <div class="footer_section">
+    <div class="container">
+      <div class="row footer_block">
+        <!-- Dealer Locator -->
+        <div class="col-lg-3 col-md-6">
+          <div class="footer_box">
+            <h5>DEALER LOCATOR</h5>
+            <div class="par_sec">
+              <p>Find the closest dealer location and contact information</p>
+              <a href="{{ routes.dealer_locator_url }}" class="site_btn">Find</a>
+            </div>
+          </div>
+        </div>
+        <!-- Customer Service Request -->
+        <div class="col-lg-3 col-md-6">
+          <div class="footer_box">
+            <h5>CUSTOMER SERVICE REQUEST</h5>
+            <div class="par_sec">
+              <p>Submit a service request and get assistance</p>
+              <a href="{{ routes.customer_service_url }}" class="site_btn">EXPLORE</a>
+            </div>
+          </div>
+        </div>
+        <!-- Download Catalogue -->
+        <div class="col-lg-3 col-md-6">
+          <div class="footer_box">
+            <h5>DOWNLOAD CATALOGUE</h5>
+            <div class="par_sec">
+              <p>Download our latest product catalogue</p>
+              <a href="{{ 'catalog.pdf' | file_url }}" class="site_btn">DOWNLOAD</a>
+            </div>
+          </div>
+        </div>
+        <!-- Talk to an Expert -->
+        <div class="col-lg-3 col-md-6">
+          <div class="footer_box">
+            <h5>TALK TO AN EXPERT</h5>
+            <div class="par_sec">
+              <p>Contact our experts for advice and help</p>
+              <a href="tel:{{ shop.phone }}" class="site_btn">CALL US</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Links -->
+      <div class="row footer_main m-0">
+        <!-- Information Section -->
+        <div class="col-lg-3 col-md-6 p-0">
+          <div class="footer_menu">
+            <h6>Information</h6>
+            <ul>
+              <li><a href="{{ routes.about_us_url }}">About Us</a></li>
+              <li><a href="{{ routes.exports_url }}">Exports</a></li>
+              <li><a href="{{ routes.certifications_url }}">Certifications</a></li>
+              <li><a href="{{ routes.media_url }}">Media</a></li>
+              <li><a href="{{ routes.careers_url }}">Careers</a></li>
+              <li><a href="{{ routes.who_we_are_url }}">Who we are</a></li>
+              <li><a href="{{ routes.investors_url }}">Investors</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Products Section -->
+        <div class="col-lg-3 col-md-6 p-0">
+          <div class="footer_menu">
+            <h6>Products</h6>
+            <ul>
+              <li><a href="{{ routes.allied_url }}">Allied</a></li>
+              <li><a href="{{ routes.bathroom_accessories_url }}">Bathroom Accessories</a></li>
+              <li><a href="{{ routes.bathroom_faucets_url }}">Bathroom Faucets</a></li>
+              <li><a href="{{ routes.kitchen_faucets_url }}">Kitchen Faucets</a></li>
+              <li><a href="{{ routes.other_items_url }}">Other useful items</a></li>
+              <li><a href="{{ routes.showers_url }}">Showers</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Useful Links Section -->
+        <div class="col-lg-3 col-md-6 p-0">
+          <div class="footer_menu">
+            <h6>Useful Links</h6>
+            <ul>
+              <li><a href="{{ routes.blog_url }}">Blog</a></li>
+              <li><a href="{{ routes.privacy_policy_url }}">Privacy Policy</a></li>
+              <li><a href="{{ routes.terms_conditions_url }}">Terms & Conditions</a></li>
+              <li><a href="{{ routes.amazon_store_url }}">Amazon Store</a></li>
+              <li><a href="{{ routes.contact_url }}">Talk to us</a></li>
+              <li><a href="{{ routes.feedback_url }}">Feedback</a></li>
+              <li><a href="{{ routes.contact_us_url }}">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Duplicate Useful Links Section (if needed) -->
+        <div class="col-lg-3 col-md-6 p-0">
+          <div class="footer_menu">
+            <h6>Useful Links</h6>
+            <ul>
+              <li><a href="{{ routes.blog_url }}">Blog</a></li>
+              <li><a href="{{ routes.privacy_policy_url }}">Privacy Policy</a></li>
+              <li><a href="{{ routes.terms_conditions_url }}">Terms & Conditions</a></li>
+              <li><a href="{{ routes.amazon_store_url }}">Amazon Store</a></li>
+              <li><a href="{{ routes.contact_url }}">Talk to us</a></li>
+              <li><a href="{{ routes.feedback_url }}">Feedback</a></li>
+              <li><a href="{{ routes.contact_us_url }}">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Copyright Section -->
+  <div class="copyright_sec">
+    <div class="container">
+      <p>&copy; 2024, {{ shop.name }}</p>
+    </div>
+  </div>
+</footer>
