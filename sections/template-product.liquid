@@ -1,0 +1,448 @@
+
+<style>
+  .counting {
+    font-size: 2rem; /* Match h2 font size */
+    font-weight: 500; /* Match h2 font weight */
+    border: none;
+    text-align: center; /* Center the text */
+    appearance: none; /* Remove default input appearance */
+    width: 80px; /* Adjust the width as needed */
+  }
+
+  .counting:focus {
+    outline: none; /* Remove the default focus outline */
+  }
+
+  /* Hide the spinner buttons in WebKit browsers (Chrome, Safari) */
+  .counting::-webkit-inner-spin-button,
+  .counting::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Hide the spinner buttons in Firefox */
+  .counting[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>
+
+
+<section>
+    <div class="product_detail_section">
+        <div class="container">
+            
+            <div class="detail_outer">
+                <div class="row">
+                    
+                        <div class="col-lg-6">
+                            <div class="main_img">
+                                {% for media in product.media %}
+                                    {% render 'product-media', media:media %}
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            {% form 'product', product %}
+                                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                                <div class="detail_caption">
+
+                                    <h4> {{ product.description }}
+                                        
+                                    <span>{{ product.title }}</span></h4>
+
+                                    <p class="crystal_id">562IN-SD-VS</p>
+
+                                    {% comment %} PRODUCT PRICE {% endcomment %}
+                                    
+                                    {%  assign product_price = product.selected_or_first_available_variant.price | money_without_currency  %}
+
+                                    {% assign product_compare_at_price = product.selected_or_first_available_variant.compare_at_price | money_without_currency %}
+
+                                    <div class="main_price d-flex align-items-center">
+                                        <div class="price_inline">
+                                            <p>₹{{ product_price }} <span>MRP ₹{{ product_compare_at_price }}</span></p>
+                                            <div class="it_sec">Inclusive of all taxes</div>
+                                        </div>
+                                        {% capture discount %}
+                                            {{ product_compare_at_price | minus:product_price | times:100 | divided_by:product_compare_at_price }}% 
+                                            {% endcapture %}
+
+                                        <div class="discount_sec">
+                                            <p>{{ discount }} OFF</p>
+                                        </div>
+
+                                    </div>
+                                    
+                                    {% comment %} PRODUCT VARIANT (COLOR) {% endcomment %}
+                                    
+
+
+                                    {% unless product.has_only_default_variant %}
+                                        
+                                        <div data-url="{{ product.url }}" data-section = "{{ section.id }}">
+                                            {% for option in product.options_with_values %}
+                                                {% if option.name == "Color" %}
+                                                    {% assign color_tag = "Color/Finish" %}
+                                                {% endif %}
+                                                <label for="Option- {{ section.id }}-{{forloop.index0 }}" class="dec-color">{{ color_tag  }}</label>
+                                                
+                                                <div class="color-div">
+                                                    <ul class="tri-color d-flex">
+                                                        {% comment %} {% for value in option.values %} {% endcomment %}
+                                                            {% comment %} <li> 
+                                                                <div class="bg-{{ value | handle }} w-[88px] h-[40px]" >
+
+                                                                </div>
+                                                                <h3>{{ value | escape }}</h3>
+                                                                
+                                                            </li> {% endcomment %}
+                                                            <select name="options[{{ option.name |  escape }}]" id="Option-{{ section.id }} - {{ forloop.index0 }}" class="w-50 border py-2 px-3 border-dark">
+                                                                {% for value in option.values %}
+                                                                    <option
+                                                                        value="{{ value |  escape }}"
+                                                                        {% if option.selected_value == value %}
+                                                                            selected= "selected"
+                                                                        {% endif %}
+                                                                        
+                                                                    >{{ value }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        
+                                                    </ul>
+                                                </div>
+
+                                            
+
+                                            {% endfor %}
+
+                                        </div>
+
+                                    {% endunless %}
+
+                                    
+    
+                                    <h5 class="delivery-content mt-0">Check Delivery and Installation Service
+                                        <span>Enter your pincode below to check availability in your area</span>
+                                    </h5>
+                                    <div class="input_sec">
+                                        <input type="text" placeholder="Pincode" class="pincode_field border border-dark">
+                                    </div>
+                                    <div class="itms_div d-flex align-items-center justify-content-between">
+                                        <div class="counter_box">
+                                            <div class="counter_div d-flex align-items-center justify-content-between">
+                                                <button onclick="decrement()">-</button>
+                                                {% comment %} <h2 class="counting" id="Quantity-{{ section.id }}"></h2> {% endcomment %}
+                                                <input type="number" name="quantity" class="counting" id="Quantity-{{ section.id }}" value="1">
+                                                <button onclick="increment()">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="add_to_cart">
+                                            <button  type="submit" class="site_btn text-center border-0" style="transition: all 0.3s ease;"
+                                                {% if product.selected_or_first_available_variant.available == false %}
+                                                    disabled
+                                                {% endif %}
+                                            >
+                                                {% if product.selected_or_first_available_variant.available == false %}
+                                                    Sold out
+                                                {% else %}
+                                                    ADD TO CART
+                                                {% endif %}
+                                            </button>
+                                        </div>
+                                        <div class="heart_div">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion_div">
+                                    <div class="my_accordion">
+                                        <div class="accordion accod" id="accordionExample">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header cryst_accordion">
+                                                    <button class="accordion-button my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        Features
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body cryst_accord_body">
+                                                        <p>Add a custom accent to your kitchen with the three interchangeable handles of the Malleco pull-down kitchen faucet. Malleco also features KOHLER's Sweep™ Spray that forms a blade of water to forcibly wash debris into the drain, and a magnetic docking syst<br> Single lever handle is simple to use and makes adjusting water temperature easy.<br> Includes three interchangeable silicone handles in black, white, and taupe. High-arch gooseneck spout and 360-degree spout rotation offer superior clearance for filling pots and cleaning. <br> Two-function pull-down sprayhead with touch-control allows you to switch between Sweep Spray and stream.<a href="#">View More</a> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                        Installation & Service Part
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body cryst_accord_body">
+                                                        <p>Add a custom accent to your kitchen with the three interchangeable handles of the Malleco pull-down kitchen faucet. Malleco also features KOHLER's Sweep™ Spray that forms a blade of water to forcibly wash debris into the drain, and a magnetic docking syst<br> Single lever handle is simple to use and makes adjusting water temperature easy.<br> Includes three interchangeable silicone handles in black, white, and taupe. High-arch gooseneck spout and 360-degree spout rotation offer superior clearance for filling pots and cleaning. <br> Two-function pull-down sprayhead with touch-control allows you to switch between Sweep Spray and stream.<a href="#">View More</a> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                        Additional Information
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body cryst_accord_body">
+                                                        <p>Add a custom accent to your kitchen with the three interchangeable handles of the Malleco pull-down kitchen faucet. Malleco also features KOHLER's Sweep™ Spray that forms a blade of water to forcibly wash debris into the drain, and a magnetic docking syst<br> Single lever handle is simple to use and makes adjusting water temperature easy.<br> Includes three interchangeable silicone handles in black, white, and taupe. High-arch gooseneck spout and 360-degree spout rotation offer superior clearance for filling pots and cleaning. <br> Two-function pull-down sprayhead with touch-control allows you to switch between Sweep Spray and stream.<a href="#">View More</a> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                        Return & Warranty
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body cryst_accord_body">
+                                                        <p>Add a custom accent to your kitchen with the three interchangeable handles of the Malleco pull-down kitchen faucet. Malleco also features KOHLER's Sweep™ Spray that forms a blade of water to forcibly wash debris into the drain, and a magnetic docking syst<br> Single lever handle is simple to use and makes adjusting water temperature easy.<br> Includes three interchangeable silicone handles in black, white, and taupe. High-arch gooseneck spout and 360-degree spout rotation offer superior clearance for filling pots and cleaning. <br> Two-function pull-down sprayhead with touch-control allows you to switch between Sweep Spray and stream.<a href="#">View More</a> </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                                
+                            {% endform %}
+                            
+
+                            
+                        </div>
+                    
+                    
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        let data = 1;
+        const inputElement = document.querySelector(".counting");
+
+        // Initialize the input field
+        inputElement.value = data;
+
+        // Event listener for the input field to handle manual input and Enter key press
+        inputElement.addEventListener("input", function() {
+            // Update data with the value entered by the user, ensuring it's a number
+            data = parseInt(inputElement.value) || 1;
+        });
+
+        // Event listener for the input field to handle Enter key press
+        inputElement.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                // Prevent the default action if needed
+                event.preventDefault();
+                // Ensure the value is updated correctly
+                data = parseInt(inputElement.value) || 1;
+            }
+        });
+
+        function increment() {
+            event.preventDefault();
+            // Increase data and update the input field
+            data++;
+            inputElement.value = data;
+        }
+
+        function decrement() {
+            event.preventDefault();
+            // Decrease data if greater than 1 and update the input field
+            if (data > 1) {
+                data--;
+                inputElement.value = data;
+            }
+        }
+
+
+
+
+        $('.menu_icon_sec > a').on('click', function(){
+        $('body').addClass('active_menu');
+        });
+
+        $('.cross_icon span').on('click', function(){
+            $('body').removeClass('active_menu');
+        });
+
+        $(window).resize(function() {
+            if (window.innerWidth < 991) {
+                $(document).ready(function () {
+                    $('.nav li a + i').on("click", function (e) {
+                        e.preventDefault();
+                        $(this).parent().find('>ul').slideToggle(100);
+                    });
+                });
+            }
+        }).resize();
+
+
+        $(window).scroll(function(){
+            var sticky = $('header'),
+            scroll = $(window).scrollTop();
+            if (scroll >= 150){
+                sticky.addClass('fixed_header');
+            }
+            else {
+                sticky.removeClass('fixed_header');
+            }
+        });
+       
+
+        $(document).ready(function(){
+            $('.h_height').matchHeight();
+            $('.footer_menu').matchHeight();
+            $('.footer_box').matchHeight();
+            
+        });
+
+
+
+    </script>
+</section>
+
+<section>
+    <div class="related_product_section">
+        <div class="container">
+            <div class="heading_sec">
+                <h2>Related Products</h2>
+            </div>
+            <div class="related_outer mar_btm">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="main_block">
+                            <div class="main_img">
+                                <span>
+                                    <img src="{{ 'h_img1.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 img_show">
+                                    <img src="{{ 'h_img2.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 d-none img_hide">
+                                </span>
+                                <div class="main_btn">
+                                    <a href="#" class="site_btn w-100 text-center">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="main_caption">
+                                <h4>
+                                    <a href="#">Rain Duet Filter Shower</a>
+                                    <span>Rain Duet Filter Shower With Activated Charcoal And 5 Showering Modes</span>
+                                </h4>
+                                <p class="crystal_id">562IN-SD-VS</p>
+                                <div class="main_price d-flex align-items-center">
+                                    <div class="price_inline">
+                                        <p>₹8,199.00 <span>MRP ₹17,000.00</span></p>
+                                        <div class="it_sec">Inclusive of all taxes</div>
+                                    </div>
+                                    <div class="discount_sec">
+                                        <p>52% OFF</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="main_block">
+                            <div class="main_img">
+                                <span>
+                                    <img src="{{ 'h_img1.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 img_show">
+                                    <img src="{{ 'h_img2.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 d-none img_hide">
+                                </span>
+                                <div class="main_btn">
+                                    <a href="#" class="site_btn w-100 text-center">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="main_caption">
+                                <h4>
+                                    <a href="#">Rain Duet Filter Shower</a>
+                                    <span>Rain Duet Filter Shower With Activated Charcoal And 5 Showering Modes</span>
+                                </h4>
+                                <p class="crystal_id">562IN-SD-VS</p>
+                                <div class="main_price d-flex align-items-center">
+                                    <div class="price_inline">
+                                        <p>₹8,199.00 <span>MRP ₹17,000.00</span></p>
+                                        <div class="it_sec">Inclusive of all taxes</div>
+                                    </div>
+                                    <div class="discount_sec">
+                                        <p>52% OFF</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="main_block">
+                            <div class="main_img">
+                                <span>
+                                    <img src="{{ 'h_img1.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 img_show">
+                                    <img src="{{ 'h_img2.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 d-none img_hide">
+                                </span>
+                                <div class="main_btn">
+                                    <a href="#" class="site_btn w-100 text-center">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="main_caption">
+                                <h4>
+                                    <a href="#">Rain Duet Filter Shower</a>
+                                    <span>Rain Duet Filter Shower With Activated Charcoal And 5 Showering Modes</span>
+                                </h4>
+                                <p class="crystal_id">562IN-SD-VS</p>
+                                <div class="main_price d-flex align-items-center">
+                                    <div class="price_inline">
+                                        <p>₹8,199.00 <span>MRP ₹17,000.00</span></p>
+                                        <div class="it_sec">Inclusive of all taxes</div>
+                                    </div>
+                                    <div class="discount_sec">
+                                        <p>52% OFF</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="main_block">
+                            <div class="main_img">
+                                <span>
+                                    <img src="{{ 'h_img1.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 img_show">
+                                    <img src="{{ 'h_img2.png' | asset_url }}" alt="h_img1" class="img-fluid w-100 d-none img_hide">
+                                </span>
+                                <div class="main_btn">
+                                    <a href="#" class="site_btn w-100 text-center">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="main_caption">
+                                <h4>
+                                    <a href="#">Rain Duet Filter Shower</a>
+                                    <span>Rain Duet Filter Shower With Activated Charcoal And 5 Showering Modes</span>
+                                </h4>
+                                <p class="crystal_id">562IN-SD-VS</p>
+                                <div class="main_price d-flex align-items-center">
+                                    <div class="price_inline">
+                                        <p>₹8,199.00 <span>MRP ₹17,000.00</span></p>
+                                        <div class="it_sec">Inclusive of all taxes</div>
+                                    </div>
+                                    <div class="discount_sec">
+                                        <p>52% OFF</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
