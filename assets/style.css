@@ -200,7 +200,7 @@ ul { margin-bottom: 0px; padding-left: 0;}
 .color-div ul li .clr-3{background-color: #D5D0BA; width: 88px; height:40px;}
 .tri-color h3{font-size: 13px; color:#232323; margin-right: 10px; text-align: center; margin-top: 10px;}
 .head_div h3{font-size: 13px; color:#232323; margin-right: 10px; text-align: center;}
-.delivery-content{color: #707070; font-size: 18px;  font-family: "Montserrat", sans-serif;line-height: 1.5; padding-top: 30px;}
+.delivery-content{color: #707070; font-size: 18px;  font-family: "Montserrat", sans-serif;line-height: 1.5; padding-top: 10px;}
 .delivery-content span{color: #232323; display: block; font-size: 14px;}
 .input_sec{padding-top: 20px;}
 .pincode_field{padding: 10px; font-size: 14px; width:196px}
@@ -586,7 +586,8 @@ ul { margin-bottom: 0px; padding-left: 0;}
 .counter_div{width: 100%;margin-bottom: 20px;}
 
 .my-inp-grp{width: 300px;}
-.my_btn_accord{padding: 10px;}
+
+.my_btn_accord{padding: 8px;}
 .main_caption{padding-top: 0;}
 .mar_btm{margin-bottom: 0;}
 .counter_box{width: 100%;}
@@ -596,7 +597,9 @@ ul { margin-bottom: 0px; padding-left: 0;}
 .detail_caption .price_inline p {
     font-size: 30px;
 }
-.delivery-content {font-size: 16px; padding-top: 44px;}
+
+/* CHANGES MADE 2 */
+.delivery-content {font-size: 16px; padding-top: 4px;}
 .delivery-content span {
     font-size: 15px;
     font-weight: bold;

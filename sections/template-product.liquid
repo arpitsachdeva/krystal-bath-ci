@@ -1,7 +1,9 @@
 
+{% assign selected_variant = product.selected_or_first_available_variant %}
+
 <style>
   .counting {
-    font-size: 2rem; /* Match h2 font size */
+    font-size: 1.5rem; /* Match h2 font size */
     font-weight: 500; /* Match h2 font weight */
     border: none;
     text-align: center; /* Center the text */
@@ -45,116 +47,136 @@
 
                         <div class="col-lg-6">
                             {% form 'product', product %}
-                                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                                <input type="hidden" name="id" value="{{ selected_variant.id }}">
+
+                                
                                 <div class="detail_caption">
 
-                                    <h4> {{ product.description }}
-                                        
-                                    <span>{{ product.title }}</span></h4>
+                                    {% for block in section.blocks %}
+                                        {% case block.type  %}
+                                            {% when 'description' %}
+                                                <h4> {{ product.description }}
+                                            
+                                            {% when 'title' %}
+                                                <span>{{ product.title }}</span></h4>
+                                                <p class="crystal_id">562IN-SD-VS</p>
 
-                                    <p class="crystal_id">562IN-SD-VS</p>
-
-                                    {% comment %} PRODUCT PRICE {% endcomment %}
+                                            {% when 'price' %}
+                                            {% comment %} PRODUCT PRICE {% endcomment %}
                                     
-                                    {%  assign product_price = product.selected_or_first_available_variant.price | money_without_currency  %}
+                                                {%  assign product_price = selected_variant.price | money_without_currency  %}
 
-                                    {% assign product_compare_at_price = product.selected_or_first_available_variant.compare_at_price | money_without_currency %}
+                                                {% assign product_compare_at_price = selected_variant.compare_at_price | money_without_currency %}
 
-                                    <div class="main_price d-flex align-items-center">
-                                        <div class="price_inline">
-                                            <p>₹{{ product_price }} <span>MRP ₹{{ product_compare_at_price }}</span></p>
-                                            <div class="it_sec">Inclusive of all taxes</div>
-                                        </div>
-                                        {% capture discount %}
-                                            {{ product_compare_at_price | minus:product_price | times:100 | divided_by:product_compare_at_price }}% 
-                                            {% endcapture %}
+                                                <div class="main_price d-flex align-items-center">
+                                                    <div class="price_inline">
+                                                        <p>₹{{ product_price }} <span>MRP ₹{{ product_compare_at_price }}</span></p>
+                                                        <div class="it_sec">Inclusive of all taxes</div>
+                                                    </div>
+                                                    {% capture discount %}
+                                                        {{ product_compare_at_price | minus:product_price | times:100 | divided_by:product_compare_at_price }}% 
+                                                        {% endcapture %}
 
-                                        <div class="discount_sec">
-                                            <p>{{ discount }} OFF</p>
-                                        </div>
+                                                    <div class="discount_sec">
+                                                        <p>{{ discount }} OFF</p>
+                                                    </div>
 
-                                    </div>
-                                    
-                                    {% comment %} PRODUCT VARIANT (COLOR) {% endcomment %}
-                                    
-
-
-                                    {% unless product.has_only_default_variant %}
-                                        
-                                        <div data-url="{{ product.url }}" data-section = "{{ section.id }}">
-                                            {% for option in product.options_with_values %}
-                                                {% if option.name == "Color" %}
-                                                    {% assign color_tag = "Color/Finish" %}
-                                                {% endif %}
-                                                <label for="Option- {{ section.id }}-{{forloop.index0 }}" class="dec-color">{{ color_tag  }}</label>
-                                                
-                                                <div class="color-div">
-                                                    <ul class="tri-color d-flex">
-                                                        {% comment %} {% for value in option.values %} {% endcomment %}
-                                                            {% comment %} <li> 
-                                                                <div class="bg-{{ value | handle }} w-[88px] h-[40px]" >
-
-                                                                </div>
-                                                                <h3>{{ value | escape }}</h3>
-                                                                
-                                                            </li> {% endcomment %}
-                                                            <select name="options[{{ option.name |  escape }}]" id="Option-{{ section.id }} - {{ forloop.index0 }}" class="w-50 border py-2 px-3 border-dark">
-                                                                {% for value in option.values %}
-                                                                    <option
-                                                                        value="{{ value |  escape }}"
-                                                                        {% if option.selected_value == value %}
-                                                                            selected= "selected"
-                                                                        {% endif %}
-                                                                        
-                                                                    >{{ value }}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        
-                                                    </ul>
                                                 </div>
 
-                                            
+                                            {% when 'variant_selector' %}
+                                            {% comment %} PRODUCT VARIANT (COLOR) {% endcomment %}
+                                    
+                                                <div data-url="{{ product.url }}" data-section = "{{ section.id }}" class="mb-0 pb-0">
+                                                    {% for option in product.options_with_values %}
+                                                        {% if option.name == "Color" %}
+                                                            {% assign color_tag = "Color/Finish" %}
+                                                        {% else %}
+                                                            {% assign color_tag = option.name %}
+                                                        {% endif %}
+                                                        <label for="Option- {{ section.id }}-{{ forloop.index0 }}" class="dec-color">{{ color_tag  }}</label>
+                                                        
+                                                        <div class="color-div">
+                                                            <ul class="tri-color d-flex mb-0">
+                                                                {% comment %} {% for value in option.values %} {% endcomment %}
+                                                                    {% comment %} <li> 
+                                                                        <div class="bg-{{ value | handle }} w-[88px] h-[40px]" >
 
-                                            {% endfor %}
+                                                                        </div>
+                                                                        <h3>{{ value | escape }}</h3>
+                                                                        
+                                                                    </li> {% endcomment %}
+                                                                    <select 
+                                                                        name="options[{{ option.name | escape }}]" 
+                                                                        id="Option-{{ section.id }}-{{ forloop.index0 }}" 
+                                                                        class="w-50 border py-2 px-3 border-dark rounded">
+                                                                        {% for value in option.values %}
+                                                                            <option
+                                                                                value="{{ value | escape }}"
+                                                                                {% if option.selected_value == value %}
+                                                                                    selected="selected"
+                                                                                {% endif %}
+                                                                            >
+                                                                                {{ value }}
+                                                                            </option>
+                                                                        {% endfor %}
+                                                                    </select>
 
-                                        </div>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                    {% endfor %}
 
-                                    {% endunless %}
+                                                </div>
+                                            {% when 'pincode' %}
+                                                {% comment %} PINCODE SECTION {% endcomment %}
+                                                <div class="mt-0 pt-0">
+                                                    <h5 class="delivery-content mt-0">Check Delivery and Installation Service
+                                                    <span>Enter your pincode below to check availability in your area</span>
+                                                    </h5>
+                                                    <div class="input_sec">
+                                                        <input type="text" placeholder="Pincode" class="pincode_field border border-dark">
+                                                    </div>
+                                                </div>
+                                                
+
+                                            {% when 'quantity' %}
+                                                <div class="itms_div d-flex align-items-center justify-content-between">
+                                                    <div class="counter_box">
+                                                        <div class="counter_div d-flex align-items-center justify-content-between">
+                                                            <button onclick="decrement()">-</button>
+                                                            {% comment %} <h2 class="counting" id="Quantity-{{ section.id }}"></h2> {% endcomment %}
+                                                            <input type="number" name="quantity" class="counting" id="Quantity-{{ section.id }}" value="1" readonly>
+                                                            <button onclick="increment()">+</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add_to_cart">
+                                                        <button  type="submit" class="site_btn text-center border-0" style="transition: all 0.3s ease;"
+                                                            {% if selected_variant.available == false %}
+                                                                disabled
+                                                            {% endif %}
+                                                        >
+                                                            {% if selected_variant.available == false %}
+                                                                Sold out
+                                                            {% else %}
+                                                                ADD TO CART
+                                                            {% endif %}
+                                                        </button>
+                                                    </div>
+                                                    <div class="heart_div">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </div>
+                                                </div>
+
+                                                
+                                        
+                                            {% endcase %}
+
+
+                                    {% endfor %}
+                             
+                                    
 
                                     
-    
-                                    <h5 class="delivery-content mt-0">Check Delivery and Installation Service
-                                        <span>Enter your pincode below to check availability in your area</span>
-                                    </h5>
-                                    <div class="input_sec">
-                                        <input type="text" placeholder="Pincode" class="pincode_field border border-dark">
-                                    </div>
-                                    <div class="itms_div d-flex align-items-center justify-content-between">
-                                        <div class="counter_box">
-                                            <div class="counter_div d-flex align-items-center justify-content-between">
-                                                <button onclick="decrement()">-</button>
-                                                {% comment %} <h2 class="counting" id="Quantity-{{ section.id }}"></h2> {% endcomment %}
-                                                <input type="number" name="quantity" class="counting" id="Quantity-{{ section.id }}" value="1">
-                                                <button onclick="increment()">+</button>
-                                            </div>
-                                        </div>
-                                        <div class="add_to_cart">
-                                            <button  type="submit" class="site_btn text-center border-0" style="transition: all 0.3s ease;"
-                                                {% if product.selected_or_first_available_variant.available == false %}
-                                                    disabled
-                                                {% endif %}
-                                            >
-                                                {% if product.selected_or_first_available_variant.available == false %}
-                                                    Sold out
-                                                {% else %}
-                                                    ADD TO CART
-                                                {% endif %}
-                                            </button>
-                                        </div>
-                                        <div class="heart_div">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="accordion_div">
@@ -233,13 +255,15 @@
         let data = 1;
         const inputElement = document.querySelector(".counting");
 
-        // Initialize the input field
-        inputElement.value = data;
+        // Initialize the input field with padded value
+        inputElement.value = data.toString().padStart(2, '0');
 
         // Event listener for the input field to handle manual input and Enter key press
         inputElement.addEventListener("input", function() {
             // Update data with the value entered by the user, ensuring it's a number
             data = parseInt(inputElement.value) || 1;
+            // Update the input field with padded value
+            inputElement.value = data.toString().padStart(2, '0');
         });
 
         // Event listener for the input field to handle Enter key press
@@ -249,6 +273,8 @@
                 event.preventDefault();
                 // Ensure the value is updated correctly
                 data = parseInt(inputElement.value) || 1;
+                // Update the input field with padded value
+                inputElement.value = data.toString().padStart(2, '0');
             }
         });
 
@@ -256,7 +282,7 @@
             event.preventDefault();
             // Increase data and update the input field
             data++;
-            inputElement.value = data;
+            inputElement.value = data.toString().padStart(2, '0');
         }
 
         function decrement() {
@@ -264,9 +290,10 @@
             // Decrease data if greater than 1 and update the input field
             if (data > 1) {
                 data--;
-                inputElement.value = data;
+                inputElement.value = data.toString().padStart(2, '0');
             }
         }
+
 
 
 
@@ -446,3 +473,45 @@
 </section>
 
 
+{% schema %}
+{
+    "name": "product",
+    "blocks": [
+        {
+            "type": "title",
+            "name":"Title",
+            "limit":1
+        },
+        {
+            "type": "price",
+            "name":"Price",
+            "limit":1
+        },
+        {
+            "type": "variant_selector",
+            "name":"Variant Selector",
+            "limit":1
+        },
+        {
+            "type": "quantity",
+            "name":"Quantity",
+            "limit":1
+        },
+        {
+            "type": "description",
+            "name":"Description",
+            "limit":1
+        },
+        {
+            "type": "product_details",
+            "name":"Product Details",
+            "limit":1
+        },
+        {
+            "type": "pincode",
+            "name":"Pincode",
+            "limit":1
+        }
+    ]
+}
+{% endschema %}
