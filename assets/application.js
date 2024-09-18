@@ -239,6 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const apiUrl = `http://localhost:3000/fetch-collection-products-and-shop-info/${encodeURIComponent(collection.name)}`; // Update URL for production
   
       if (container) {
+
+        // Show the loader before fetching data
+        loader.style.display = 'flex';
+
         fetch(apiUrl)
           .then(response => response.json())
           .then(data => {
@@ -296,6 +300,8 @@ document.addEventListener('DOMContentLoaded', () => {
               `;
             });
   
+            // Hide the loader and show the products
+            loader.style.display = 'none';
             container.innerHTML = productsHtml;
   
             // Add event listener for "Add to Cart" buttons

@@ -1,127 +1,147 @@
-<section>
-    <div class="listing_sec space_sec">
-        <div class="container">
-            <div class="heading_sec">
-                <h2>Bathroom<span>Discover our top-selling bathroom products and combos</span></h2>
-            </div>
-            <div class="listing_outer">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="my_accordion">
-                            <div class="accordion accod" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header cryst_accordion">
-                                    <button class="accordion-button my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Price Range
-                                    </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body cryst_accord_body">
-                                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Color/Finish
-                                    </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Category
-                                    </button>
-                                    </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body cryst_accord_body">
-                                        <ul class="cryst_accord_list">
-                                            <li>Elite-Bathroom-Set</li>
-                                            <li>Quadra-Bathroom-Set</li>
-                                            <li>Ocean-Bathroom-Set</li>
-                                            <li>Tile-Drainers</li>
-                                            <li>Shower-Drainers</li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        Collection
-                                    </button>
-                                    </h2>
-                                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body cryst_accord_body">
-                                        <ul class="cryst_accord_list">
-                                            <li>Elite-Bathroom-Set</li>
-                                            <li>Quadra-Bathroom-Set</li>
-                                            <li>Ocean-Bathroom-Set</li>
-                                            <li>Tile-Drainers</li>
-                                            <li>Shower-Drainers</li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                        Availability
-                                    </button>
-                                    </h2>
-                                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body cryst_accord_body">
-                                        <ul class="cryst_accord_list">
-                                            <li>Elite-Bathroom-Set</li>
-                                            <li>Quadra-Bathroom-Set</li>
-                                            <li>Ocean-Bathroom-Set</li>
-                                            <li>Tile-Drainers</li>
-                                            <li>Shower-Drainers</li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                        Installation
-                                    </button>
-                                    </h2>
-                                    <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body cryst_accord_body">
-                                        <ul class="cryst_accord_list">
-                                            <li>Elite-Bathroom-Set</li>
-                                            <li>Quadra-Bathroom-Set</li>
-                                            <li>Ocean-Bathroom-Set</li>
-                                            <li>Tile-Drainers</li>
-                                            <li>Shower-Drainers</li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row listing_btm" id="bathroom">
-                            
-                            <!-- Repeat product block for other products -->
+{% if collection.handle == 'all' %}
 
-                            
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-        </div>
+  <div class="under-development-message d-flex flex-column justify-content-center align-items-center min-vh-50 text-center bg-light py-5">
+    <div class="p-4 p-md-5 m-3 shadow-lg rounded bg-white">
+      <h1 class="display-5 display-md-4 text-danger mb-4">Page Under Development</h1>
+      <p class="lead text-muted mb-4">This page is currently under development. Please check back later.</p>
+      <a href="/" class="btn btn-primary btn-lg mt-3">Go Back to Homepage</a>
     </div>
-</section>
+  </div>
+
+{% else %}
+  <!-- Normal collection page content goes here -->
+
+  <section>
+      <div class="listing_sec space_sec">
+          <div class="container">
+              <div class="heading_sec">
+                  <h2>Bathroom<span>Discover our top-selling bathroom products and combos</span></h2>
+              </div>
+              <div class="listing_outer">
+                  <div class="row">
+                      <div class="col-lg-3">
+                          <div class="my_accordion">
+                              <div class="accordion accod" id="accordionExample">
+                                  <div class="accordion-item">
+                                      <h2 class="accordion-header cryst_accordion">
+                                      <button class="accordion-button my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          Price Range
+                                      </button>
+                                      </h2>
+                                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body cryst_accord_body">
+                                          <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                      <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                          Color/Finish
+                                      </button>
+                                      </h2>
+                                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body">
+                                          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                      <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                          Category
+                                      </button>
+                                      </h2>
+                                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body cryst_accord_body">
+                                          <ul class="cryst_accord_list">
+                                              <li>Elite-Bathroom-Set</li>
+                                              <li>Quadra-Bathroom-Set</li>
+                                              <li>Ocean-Bathroom-Set</li>
+                                              <li>Tile-Drainers</li>
+                                              <li>Shower-Drainers</li>
+                                          </ul>
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                      <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                          Collection
+                                      </button>
+                                      </h2>
+                                      <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body cryst_accord_body">
+                                          <ul class="cryst_accord_list">
+                                              <li>Elite-Bathroom-Set</li>
+                                              <li>Quadra-Bathroom-Set</li>
+                                              <li>Ocean-Bathroom-Set</li>
+                                              <li>Tile-Drainers</li>
+                                              <li>Shower-Drainers</li>
+                                          </ul>
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                      <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                          Availability
+                                      </button>
+                                      </h2>
+                                      <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body cryst_accord_body">
+                                          <ul class="cryst_accord_list">
+                                              <li>Elite-Bathroom-Set</li>
+                                              <li>Quadra-Bathroom-Set</li>
+                                              <li>Ocean-Bathroom-Set</li>
+                                              <li>Tile-Drainers</li>
+                                              <li>Shower-Drainers</li>
+                                          </ul>
+                                      </div>
+                                      </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                      <button class="accordion-button collapsed my_btn_accord" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                          Installation
+                                      </button>
+                                      </h2>
+                                      <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                      <div class="accordion-body cryst_accord_body">
+                                          <ul class="cryst_accord_list">
+                                              <li>Elite-Bathroom-Set</li>
+                                              <li>Quadra-Bathroom-Set</li>
+                                              <li>Ocean-Bathroom-Set</li>
+                                              <li>Tile-Drainers</li>
+                                              <li>Shower-Drainers</li>
+                                          </ul>
+                                      </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-9">
+                          <div class="row listing_btm" id="bathroom">
+                              
+                              <!-- Repeat product block for other products -->
+                              <div id="loader" class="d-flex justify-content-center align-items-center min-vh-50">
+                                <div class="spinner-border text-primary" role="status">
+                                  <span class="visually-hidden">Loading...</span>
+                                </div>
+                              </div>
+                              
+                          </div>
+                      </div>
+
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+{% endif %}
+
 
 
