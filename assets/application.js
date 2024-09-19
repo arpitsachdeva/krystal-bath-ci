@@ -228,7 +228,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Add other mappings as needed
     };
 
-
+    if(collectionMapping[collectionName] != 'Bathroom'){
+      document.getElementById("heading_for").innerHTML = `${collectionMapping[collectionName]}`
+    }
+    
     // Update the collections array with the correct name
     const collections = [
       { id: 'bathroom', name: collectionMapping[collectionName] }
