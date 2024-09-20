@@ -82,6 +82,43 @@
 
     </section>
 
+{% elsif page.handle == "signup-and-login" %}
+
+    <div class="about1_banner_section">
+    <!-- <img src="images/banner_img.png" alt="banner_img" class="img-fluid w-100"> -->
+        <div class="about1_banner_outer">
+            <div class="container">
+                <div class="about1_banner_content">
+                    <h1>{{ 'WELCOME'  }}</h1>
+                    <p>{{ 'Login/signup to your account'  }}</p>
+                    <div class="login_btns d-flex align-items-center justify-content-center">
+                        <a href="{{ routes.account_register }}">Register</a>
+                        <a href="{{ routes.account_login }}">Login</a>
+                    </div>
+                    
+                    <div class="create_account">
+                        <h4>{{ 'CREATE AN ACCOUNT WITH YOUR MOBILE NUMBER'  }}<span>{{ 'Please Ensure You Provide A Valid Mobile Number.'  }}</span></h4>
+                    </div>
+                    <div class="input-group my-inp-grp mb-3">
+                        <select class="input-group-text my-inp-text" id="basic-addon1">
+                            <option selected>+91</option>
+                            <option value="1">+91</option>
+                            <option value="2">+92</option>
+                            <option value="3">+93</option>
+                        </select>
+                        <input type="text" class="form-control my-form-inp" aria-label="Username" aria-describedby="basic-addon1" placeholder="{{ 'Enter your mobile number'  }}">
+                    </div>
+                    <div class="confirmation">
+                        <p>{{ 'By Confirming, You agree to Our'  }} <a href="{{ 'terms' | link }}">Terms And Conditions</a> {{ 'And'  }} <a href="{{ 'privacy' | link }}">Privacy Policy</a></p>
+                    </div>
+                    <div class="banner_btn">
+                        <a href="#" class="site_btn">{{ 'GET OTP'  }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% else %}
     <div class="under-development-message d-flex flex-column justify-content-center align-items-center min-vh-50 text-center bg-light py-5">

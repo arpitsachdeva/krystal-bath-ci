@@ -1,0 +1,94 @@
+<div class="about1_banner_section">
+    <!-- <img src="images/banner_img.png" alt="banner_img" class="img-fluid w-100"> -->
+    <div class="about1_banner_outer">
+        <div class="container">
+            <div class="about1_banner_content">
+                <h1>{{ 'WELCOME'  }}</h1>
+                <p>{{ 'Login/signup to your account'}}</p>
+                <div class="login_btns d-flex align-items-center justify-content-center">
+                    <a href="/account/register">Register</a>
+                    <a href="/account/login">Login</a>
+                </div>
+                
+                <div class="create_account">
+                    <h4>{{ 'CREATE AN ACCOUNT WITH YOUR EMAIL ID'}}<span>{{ 'Please Ensure You Provide A Valid Email.'}}</span></h4>
+                </div>
+
+                {% form 'create_customer' %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong class="fw-bold">Error!</strong>
+                            <p class="d-inline">{{ form.errors | default_errors }}</p>
+                        </div>
+                    {% endif %}
+                    <div class="input-group my-inp-grp mt-4">
+
+                        <label for="first_name" class="form-label visually-hidden">First name</label>
+                        <input type="text"
+                            name="customer[first_name]"
+                            id="first_name"
+                            autocomplete="given-name"
+                            class="form-control"
+                            placeholder="First Name"
+                        >
+
+                    </div>
+
+                    <div class="input-group my-inp-grp">
+
+                        <label for="last_name" class="form-label visually-hidden">Last name</label>
+                        <input type="text"
+                            name="customer[last_name]"
+                            id="last_name"
+                            autocomplete="family-name"
+                            class="form-control"
+                            placeholder="Last name"
+                        >
+
+                    </div>
+
+                    <div class="input-group my-inp-grp">
+
+                        <label for="email_address" class="form-label visually-hidden">Email address</label>
+                        <input type="email"
+                            name="customer[email]"
+                            id="email_address"
+                            autocomplete="email"
+                            class="form-control"
+                            placeholder="Email address"
+                        >
+
+                    </div>
+                    <div class="input-group my-inp-grp">
+
+                        <label for="password" class="form-label visually-hidden">Password</label>
+                        <input type="password"
+                            name="customer[password]"
+                            id="password"
+                            autocomplete="new-password"
+                            class="form-control"
+                            placeholder="Password"
+                        >
+
+                    </div>
+
+                    {% comment %} <div class="input-group my-inp-grp mb-3">
+
+                        <input type="text" class="form-control my-form-inp" aria-label="Username" aria-describedby="basic-addon1" placeholder="{{ 'Enter your mobile number'}}">
+                    </div> {% endcomment %}
+
+                    <div class="confirmation">
+                        <p>{{ 'By Confirming, You agree to Our'}} <a href="{{ 'terms' | link }}">Terms And Conditions</a> {{ 'And'}} <a href="{{ 'privacy' | link }}">Privacy Policy</a></p>
+                    </div>
+                    <div class="banner_btn">
+                        {% comment %} <a href="#" class="site_btn">{{ 'GET OTP'}}</a> {% endcomment %}
+                        <button type="submit" class="site_btn">
+                            Create account
+                        </button>
+                    </div>
+                {% endform %}
+            </div>
+        </div>
+    </div>
+</div>
+
