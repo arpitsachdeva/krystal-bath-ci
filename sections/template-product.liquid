@@ -82,51 +82,54 @@
                                                     </div>
 
                                                 </div>
-
+                                            
                                             {% when 'variant_selector' %}
                                             {% comment %} PRODUCT VARIANT (COLOR) {% endcomment %}
-                                    
-                                                <div data-url="{{ product.url }}" data-section = "{{ section.id }}" class="mb-0 pb-0">
-                                                    {% for option in product.options_with_values %}
-                                                        {% if option.name == "Color" %}
-                                                            {% assign color_tag = "Color/Finish" %}
-                                                        {% else %}
-                                                            {% assign color_tag = option.name %}
-                                                        {% endif %}
-                                                        <label for="Option- {{ section.id }}-{{ forloop.index0 }}" class="dec-color">{{ color_tag  }}</label>
-                                                        
-                                                        <div class="color-div">
-                                                            <ul class="tri-color d-flex mb-0">
-                                                                {% comment %} {% for value in option.values %} {% endcomment %}
-                                                                    {% comment %} <li> 
-                                                                        <div class="bg-{{ value | handle }} w-[88px] h-[40px]" >
+                                                
+                                                {% unless product.has_only_default_variant %}
+                                                    <div data-url="{{ product.url }}" data-section = "{{ section.id }}" class="mb-0 pb-0"></div>
+                                                        {% for option in product.options_with_values %}
+                                                            {% if option.name == "Color" %}
+                                                                {% assign color_tag = "Color/Finish" %}
+                                                            {% else %}
+                                                                {% assign color_tag = option.name %}
+                                                            {% endif %}
+                                                            <label for="Option- {{ section.id }}-{{ forloop.index0 }}" class="dec-color">{{ color_tag  }}</label>
+                                                            
+                                                            <div class="color-div">
+                                                                <ul class="tri-color d-flex mb-0">
+                                                                    {% comment %} {% for value in option.values %} {% endcomment %}
+                                                                        {% comment %} <li> 
+                                                                            <div class="bg-{{ value | handle }} w-[88px] h-[40px]" >
 
-                                                                        </div>
-                                                                        <h3>{{ value | escape }}</h3>
-                                                                        
-                                                                    </li> {% endcomment %}
-                                                                    <select 
-                                                                        name="options[{{ option.name | escape }}]" 
-                                                                        id="Option-{{ section.id }}-{{ forloop.index0 }}" 
-                                                                        class="w-50 border py-2 px-3 border-dark rounded">
-                                                                        {% for value in option.values %}
-                                                                            <option
-                                                                                value="{{ value | escape }}"
-                                                                                {% if option.selected_value == value %}
-                                                                                    selected="selected"
-                                                                                {% endif %}
-                                                                            >
-                                                                                {{ value }}
-                                                                            </option>
-                                                                        {% endfor %}
-                                                                    </select>
+                                                                            </div>
+                                                                            <h3>{{ value | escape }}</h3>
+                                                                            
+                                                                        </li> {% endcomment %}
+                                                                        <select 
+                                                                            name="options[{{ option.name | escape }}]" 
+                                                                            id="Option-{{ section.id }}-{{ forloop.index0 }}" 
+                                                                            class="w-50 border py-2 px-3 border-dark rounded">
+                                                                            {% for value in option.values %}
+                                                                                <option
+                                                                                    value="{{ value | escape }}"
+                                                                                    {% if option.selected_value == value %}
+                                                                                        selected="selected"
+                                                                                    {% endif %}
+                                                                                >
+                                                                                    {{ value }}
+                                                                                </option>
+                                                                            {% endfor %}
+                                                                        </select>
 
-                                                                
-                                                            </ul>
-                                                        </div>
-                                                    {% endfor %}
+                                                                    
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
 
-                                                </div>
+                                                    </div>
+                                                {% endunless %}
+                                                
                                             {% when 'pincode' %}
                                                 {% comment %} PINCODE SECTION {% endcomment %}
                                                 <div class="mt-0 pt-0">
