@@ -86,11 +86,11 @@
 </div> {% endcomment %}
 
 
-<div class="about1_banner_section">
+<div class="about1_banner_section ">
     <!-- <img src="images/banner_img.png" alt="banner_img" class="img-fluid w-100"> -->
     <div class="about1_banner_outer">
-        <div class="container">
-            <div class="about1_banner_content">
+        <div class="container " x-data="{ loginForm: true, pwRecoverForm: false }">
+            <div class="about1_banner_content" x-show="loginForm" >
                 <h1>{{ 'WELCOME'  }}</h1>
                 <p>{{ 'Login/signup to your account'}}</p>
                 <div class="login_btnss d-flex align-items-center justify-content-center">
@@ -102,7 +102,7 @@
                     <h4>{{ 'CREATE AN ACCOUNT WITH YOUR EMAIL ID'}}<span>{{ 'Please Ensure You Provide A Valid Email.'}}</span></h4>
                 </div>
 
-                {% form 'create_customer' %}
+                {% form 'customer_login' %}
                     {% if form.errors %}
                         <div class="alert alert-danger" role="alert">
                             <strong class="fw-bold">Error!</strong>
@@ -122,7 +122,7 @@
 
                     </div>
 
-                   <div class="input-group my-inp-grp">
+                    <div class="input-group my-inp-grp">
 
                         <label for="password" class="form-label visually-hidden">Password</label>
                         <input type="password"
@@ -134,28 +134,71 @@
                         >
 
                     </div>
-                    
-
-                    {% comment %} <div class="input-group my-inp-grp mb-3">
-
-                        <input type="text" class="form-control my-form-inp" aria-label="Username" aria-describedby="basic-addon1" placeholder="{{ 'Enter your mobile number'}}">
-                    </div> {% endcomment %}
 
                     <div class="confirmation">
                         <p>{{ 'By Confirming, You agree to Our'}} <a href="{{ 'terms' | link }}">Terms And Conditions</a> {{ 'And'}} <a href="{{ 'privacy' | link }}">Privacy Policy</a></p>
                     </div>
+
+
                     <div class="banner_btn">
                         {% comment %} <a href="#" class="site_btn">{{ 'GET OTP'}}</a> {% endcomment %}
                         <button type="submit" class="site_btn">
                             Sign in
                         </button>
                     </div>
-                {% endform %}
+
+                    <div class="mb-3 text-muted text-sm">
+                        <a x-on:click="loginForm = false; pwRecoverForm = true" href="#" class="text-decoration-underline">
+                            Forgot your password?
+                        </a>
+                    </div>
+                {% endform %}   
+
             </div>
-            
-            
+
+            <div x-show="pwRecoverForm" class="about1_banner_content">
+                <div>
+                    <h1 class="text-center display-5 fw-bold mt-4">Recover your password</h1>
+                </div>
+                <div class="mt-4">
+                    {% form 'recover_customer_password' %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong class="fw-bold">Error!</strong>
+                                <p class="d-inline">{{ form.errors | default_errors }}</p>
+                            </div>
+                        {% endif %}
+                        <div class="input-group my-inp-grp mt-4">
+
+                        <label for="email_address" class="form-label visually-hidden">Email address</label>
+                            <input type="email"
+                                name="customer[email]"
+                                id="email_address"
+                                autocomplete="email"
+                                class="form-control"
+                                placeholder="Email address"
+                            >
+
+                        </div>
+                        <div>
+                            <button type="submit"  class="banner_btn">
+                                Recover password
+                            </button>
+                        </div>
+                        <div class="mt-4 text-muted text-sm">
+                            <a x-on:click="loginForm = true; pwRecoverForm = false" href="#" class="text-decoration-underline">Back to login</a>
+                        </div>
+                    {% endform %}
+                </div>
+            </div>
+
 
         </div>
+
+
+        
+
+
     </div>
 </div>
 
