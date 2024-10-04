@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productsContainer = document.querySelector('#recent-products');
-    const apiUrl = 'http://localhost:3000/fetch-products-and-shop-info'; // Update URL for production
+    const apiUrl = 'https://krystalbath.cilearningschool.com/fetch-products-and-shop-info'; // Update URL for production
   
     if (productsContainer) {
       fetch(apiUrl)
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     collections.forEach(collection => {
       const container = document.querySelector(`#${collection.id}`);
-      const apiUrl = `http://localhost:3000/fetch-collection-products-and-shop-info/${encodeURIComponent(collection.name)}`; // Update URL for production
+      const apiUrl = `https://krystalbath.cilearningschool.com/fetch-collection-products-and-shop-info/${encodeURIComponent(collection.name)}`; // Update URL for production
   
       if (container) {
         fetch(apiUrl)
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     collections.forEach(collection => {
       const container = document.querySelector(`#${collection.id}`);
-      const apiUrl = `http://localhost:3000/fetch-collection-products-and-shop-info/${encodeURIComponent(collection.name)}`; // Update URL for production
+      const apiUrl = `https://krystalbath.cilearningschool.com/fetch-collection-products-and-shop-info/${encodeURIComponent(collection.name)}`; // Update URL for production
   
       if (container) {
 
