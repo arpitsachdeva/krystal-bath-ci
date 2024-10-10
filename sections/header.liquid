@@ -70,7 +70,7 @@
                             <i class="fa-solid fa-angle-down"></i>
                             {% for childlink in link.links %}
                                     <ul class="sub-menu">
-                                    <li><a href="#">{{ childlink.title }}</a></li>
+                                    <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
                                     </ul>
                                 
                             {% endfor %}
