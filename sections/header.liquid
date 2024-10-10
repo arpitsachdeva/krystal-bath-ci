@@ -1,3 +1,5 @@
+
+
 <header class="header-area">
   <div class="top_header_sec">
     <div class="container">
@@ -54,7 +56,7 @@
         </div>
         <div class="main_menu_sec">
           <nav class="main-nav bottom-nav norm_menu d-flex align-items-center justify-content-center">
-            <ul class="nav ps-0 justify-content-center">
+            <ul class="nav ps-0 justify-content-center" id="main-menu" >
                 <a href="javascript:void(0)" class="cross_icon">
                     <span></span>
                     <span></span>
@@ -83,8 +85,8 @@
 
             </ul>
 
-            <div class="menu_icon_sec">
-              <a href="javascript:void(0)">
+            <div class="menu_icon_sec"> 
+              <a href="javascript:void(0)"  class="ms-auto">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -178,45 +180,77 @@
     
     <script>
         // Put your application javascript here
-        $('.menu_icon_sec > a').on('click', function(){
-            $('body').addClass('active_menu');
-        });
+        // Mobile menu toggle
+                  // Open mobile menu
+          document.querySelector('.menu_icon_sec > a').addEventListener('click', function() {
+              document.body.classList.add('active_menu');
+          });
 
-        $('.cross_icon span').on('click', function(){
-            $('body').removeClass('active_menu');
-        });
+          // Close mobile menu
+          document.querySelectorAll('.cross_icon span').forEach(function(span) {
+              span.addEventListener('click', function() {
+                  document.body.classList.remove('active_menu');
+              });
+          });
 
-        $(window).resize(function() {
-            if (window.innerWidth < 991) {
-                $(document).ready(function () {
-                    $('.nav li a + i').on("click", function (e) {
-                        e.preventDefault();
-                        $(this).parent().find('>ul').slideToggle(100);
-                    });
-                });
+
+
+        // Resize event listener
+          window.addEventListener('resize', function() {
+              if (window.innerWidth < 991) {
+                  document.addEventListener('DOMContentLoaded', function() {
+                      document.querySelectorAll('.nav li a + i').forEach(function(icon) {
+                          icon.addEventListener('click', function(e) {
+                              e.preventDefault();
+                              var submenu = this.parentElement.querySelector('ul');
+                              if (submenu) {
+                                  submenu.style.display = (submenu.style.display === 'none' || submenu.style.display === '') ? 'block' : 'none';
+                              }
+                          });
+                      });
+                  });
+              }
+          });
+
+        // Trigger the resize function once on page load
+        window.dispatchEvent(new Event('resize'));
+
+        // Scroll event listener for sticky header
+        window.addEventListener('scroll', function() {
+            var sticky = document.querySelector('header');
+            var scroll = window.scrollY;
+            if (scroll >= 150) {
+                sticky.classList.add('fixed_header');
+            } else {
+                sticky.classList.remove('fixed_header');
             }
-        }).resize();
-
-
-        $(window).scroll(function(){
-            var sticky = $('header'),
-            scroll = $(window).scrollTop();
-            if (scroll >= 150){
-                sticky.addClass('fixed_header');
-            }
-            else {
-                sticky.removeClass('fixed_header');
-            }
         });
 
-
-
-        $(document).ready(function(){
-            $('.h_height').matchHeight();
-            $('.footer_menu').matchHeight();
-            $('.footer_box').matchHeight();
-            
+        // When DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Match height (assuming the library or logic is still in place)
+            matchHeight('.h_height');
+            matchHeight('.footer_menu');
+            matchHeight('.footer_box');
         });
+
+        // Custom matchHeight function
+        function matchHeight(selector) {
+            var elements = document.querySelectorAll(selector);
+            var maxHeight = 0;
+
+            elements.forEach(function(element) {
+                element.style.height = 'auto'; // Reset height to auto before calculating
+                if (element.offsetHeight > maxHeight) {
+                    maxHeight = element.offsetHeight;
+                }
+            });
+
+            elements.forEach(function(element) {
+                element.style.height = maxHeight + 'px';
+            });
+        }
+
 
 
 
