@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
     <link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 
 
@@ -35,10 +37,10 @@
   </head>
   <body>
    
-    <head>
-      {% section 'header' %}
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
+
+    {% section 'header' %}
+
+  
 
     <main role="main">
       {{ content_for_layout }}

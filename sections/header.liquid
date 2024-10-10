@@ -195,62 +195,37 @@
 
 
 
-        // Resize event listener
-          window.addEventListener('resize', function() {
-              if (window.innerWidth < 991) {
-                  document.addEventListener('DOMContentLoaded', function() {
-                      document.querySelectorAll('.nav li a + i').forEach(function(icon) {
-                          icon.addEventListener('click', function(e) {
-                              e.preventDefault();
-                              var submenu = this.parentElement.querySelector('ul');
-                              if (submenu) {
-                                  submenu.style.display = (submenu.style.display === 'none' || submenu.style.display === '') ? 'block' : 'none';
-                              }
-                          });
-                      });
-                  });
-              }
-          });
+        $(window).resize(function() {
+            if (window.innerWidth < 991) {
+                $(document).ready(function () {
+                    $('.nav li a + i').on("click", function (e) {
+                        e.preventDefault();
+                        $(this).parent().find('>ul').slideToggle(100);
+                    });
+                });
+            }
+        }).resize();
 
-        // Trigger the resize function once on page load
-        window.dispatchEvent(new Event('resize'));
 
-        // Scroll event listener for sticky header
-        window.addEventListener('scroll', function() {
-            var sticky = document.querySelector('header');
-            var scroll = window.scrollY;
-            if (scroll >= 150) {
-                sticky.classList.add('fixed_header');
-            } else {
-                sticky.classList.remove('fixed_header');
+        $(window).scroll(function(){
+            var sticky = $('header'),
+            scroll = $(window).scrollTop();
+            if (scroll >= 150){
+                sticky.addClass('fixed_header');
+            }
+            else {
+                sticky.removeClass('fixed_header');
             }
         });
 
-        // When DOM is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            // Match height (assuming the library or logic is still in place)
-            matchHeight('.h_height');
-            matchHeight('.footer_menu');
-            matchHeight('.footer_box');
+
+
+        $(document).ready(function(){
+            $('.h_height').matchHeight();
+            $('.footer_menu').matchHeight();
+            $('.footer_box').matchHeight();
+            
         });
-
-        // Custom matchHeight function
-        function matchHeight(selector) {
-            var elements = document.querySelectorAll(selector);
-            var maxHeight = 0;
-
-            elements.forEach(function(element) {
-                element.style.height = 'auto'; // Reset height to auto before calculating
-                if (element.offsetHeight > maxHeight) {
-                    maxHeight = element.offsetHeight;
-                }
-            });
-
-            elements.forEach(function(element) {
-                element.style.height = maxHeight + 'px';
-            });
-        }
-
 
 
 
